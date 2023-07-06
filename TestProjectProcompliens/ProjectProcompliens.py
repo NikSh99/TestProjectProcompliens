@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 import pandas as pd
-#import subprocess
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'secretkey'  #секретный ключ
@@ -14,7 +13,7 @@ def login():
     username = request.json.get('username')
     password = request.json.get('password')
 
-    # Проверка имени пользователя и пароля (здесь используйте свою реализацию)
+    # Проверка имени пользователя и пароля
     if username == 'admin' and password == 'password':
         access_token = create_access_token(identity=username)
         return jsonify(access_token=access_token), 200
@@ -55,5 +54,4 @@ def get_data(filename):
     return df.to_dict(orient='records')
 
 if __name__ == '__main__':
-    #subprocess.run(['python', 'C:\\Users\\Никита\\source\\repos\\TestProjectProcompliens\\TestProjectProcompliens\\PyTestMod.py'])
     app.run()
